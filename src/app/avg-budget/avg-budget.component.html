@@ -1,0 +1,35 @@
+<div class="card">
+  <h3>Trip Budget Statistics</h3>
+
+  <div class="p-field">
+    <label>Filter by Trip Type</label>
+    <p-dropdown [options]="tripTypes" [(ngModel)]="selectedType" (onChange)="onTripTypeChange()"></p-dropdown>
+  </div>
+
+  <div class="p-grid">
+    <div class="p-col-12 p-md-3">
+      <div class="stat-card">
+        <h4>Total Trips</h4>
+        <p>{{ totalTrips }}</p>
+      </div>
+    </div>
+    <div class="p-col-12 p-md-3">
+      <div class="stat-card">
+        <h4>Average Budget</h4>
+        <p>{{ averageBudget | currency:'INR':'symbol':'1.0-0' }}</p>
+      </div>
+    </div>
+    <div class="p-col-12 p-md-3">
+      <div class="stat-card">
+        <h4>Max Budget</h4>
+        <p>{{ maxBudget | currency:'INR':'symbol':'1.0-0' }}</p>
+      </div>
+    </div>
+    <div class="p-col-12 p-md-3">
+      <div class="stat-card">
+        <h4>Min Budget</h4>
+        <p>{{ minBudget | currency:'INR':'symbol':'1.0-0' }}</p>
+      </div>
+    </div>
+  </div>
+</div>

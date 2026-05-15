@@ -1,0 +1,31 @@
+<p-table [value]="upcomingTrips" responsiveLayout="scroll" [paginator]="true" [rows]="5">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Trip Name</th>
+      <th>Trip ID</th>
+      <th>Type</th>
+      <th>Source</th>
+      <th>Destination</th>
+      <th>Departure</th>
+      <th>Return</th>
+      <th>Transport</th>
+      <th>Budget</th>
+      <th>Status</th>
+    </tr>
+  </ng-template>
+
+  <ng-template pTemplate="body" let-trip>
+    <tr>
+      <td>{{ trip.tripName }}</td>
+      <td>{{ trip.tripId }}</td>
+      <td>{{ trip.tripType }}</td>
+      <td>{{ trip.sourceCity }}</td>
+      <td>{{ trip.destinationCity }}</td>
+      <td>{{ trip.departureDate }}</td>
+      <td>{{ trip.returnDate }}</td>
+      <td>{{ trip.transportMode }}</td>
+      <td>{{ trip.estimatedBudget }}</td>
+      <td>{{ trip.tripStatus }}</td>
+    </tr>
+  </ng-template>
+</p-table>

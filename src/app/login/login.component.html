@@ -1,0 +1,41 @@
+<div class="login-page">
+  <div class="login-wrapper">
+    <p-card header="Welcome Back!" class="login-card">
+      <p class="subtitle">Login to plan your next adventure</p>
+      <form [formGroup]="loginForm" class="login-form">
+
+        <div class="field">
+          <label>Username</label>
+          <input
+            pInputText
+            formControlName="username"
+            placeholder="Enter username"
+          />
+          <small class="error" *ngIf="loginForm.get('username')?.touched && loginForm.get('username')?.invalid">
+            Username is required
+          </small>
+        </div>
+
+        <div class="field">
+          <label>Password</label>
+          <p-password
+            formControlName="password"
+            placeholder="Enter password"
+            [feedback]="false"
+          ></p-password>
+          <small class="error" *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid">
+            Password is required
+          </small>
+        </div>
+
+        <p-button
+          label="Login"
+          icon="pi pi-sign-in"
+          class="login-btn"
+          (onClick)="login()"
+        ></p-button>
+
+      </form>
+    </p-card>
+  </div>
+</div>

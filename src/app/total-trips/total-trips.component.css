@@ -1,0 +1,8 @@
+.ng-invalid.ng-dirty,
+.ng-invalid.ng-touched {
+  border-color: #e24c4c !important;
+}
+
+.p-error {
+  font-size: 12px;
+}

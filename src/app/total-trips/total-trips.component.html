@@ -1,0 +1,193 @@
+
+<p-toolbar class="mb-3">
+  <div class="p-toolbar-group-left flex align-items-center gap-3">
+    <h3 class="m-0">Total Trips</h3>
+
+
+    <input 
+      pInputText 
+      type="text" 
+      placeholder="Search Trips" 
+      (input)="applyGlobalFilter($event)" 
+      style="width: 200px;" />
+  </div>
+
+  <div class="p-toolbar-group-right">
+    <p-button
+      label="Add Trip"
+      icon="pi pi-plus"
+      class="p-button-success"
+      (onClick)="openAddDialog()">
+    </p-button>
+  </div>
+</p-toolbar>
+
+<p-dialog
+  [header]="isEditMode ? 'Edit Trip' : 'Add Trip'"
+  [(visible)]="displayDialog"
+  [modal]="true"
+  [style]="{ width: '650px' }">
+
+  <form [formGroup]="tripForm" class="p-fluid">
+
+ <div class="p-field">
+  <label>Trip Name</label>
+
+  <input
+    pInputText
+    formControlName="tripName"
+    [ngClass]="{'ng-invalid ng-dirty': isInvalid('tripName')}" />
+
+  <small class="p-error" *ngIf="isInvalid('tripName')">
+    Trip Name is required
+  </small>
+</div>
+
+<br>
+    <div class="p-field">
+      <label>Trip ID</label>
+      <input pInputText formControlName="tripId" [disabled]="true"  />
+    </div>
+<br>
+   <div class="p-field">
+  <label>Trip Type</label>
+
+  <p-dropdown
+    [options]="tripTypes"
+    formControlName="tripType"
+    placeholder="Select Trip Type"
+    [ngClass]="{'ng-invalid ng-dirty': isInvalid('tripType')}">
+  </p-dropdown>
+
+  <small class="p-error" *ngIf="isInvalid('tripType')">
+    Trip Type is required
+  </small>
+</div>
+<br>
+
+    <div class="p-field">
+      <label>Source City</label>
+      <input pInputText formControlName="sourceCity" />
+    </div>
+<br>
+    <div class="p-field">
+      <label>Destination City</label>
+      <input pInputText formControlName="destinationCity" />
+    </div>
+<br>
+  <div class="p-field">
+  <label>Departure Date</label>
+
+  <p-calendar
+    formControlName="departureDate"
+    [showIcon]="true"
+    [ngClass]="{'ng-invalid ng-dirty': isInvalid('departureDate')}">
+  </p-calendar>
+
+  <small class="p-error" *ngIf="isInvalid('departureDate')">
+    Departure Date is required
+  </small>
+</div>
+
+<br>
+    <div class="p-field">
+      <label>Return Date</label>
+      <p-calendar formControlName="returnDate"></p-calendar>
+    </div>
+<br>
+    <div class="p-field">
+      <label>Transport Mode</label>
+      <p-dropdown [options]="transportModes" formControlName="transportMode"></p-dropdown>
+    </div>
+<br>
+   <div class="p-field">
+  <label>Estimated Budget</label>
+
+  <p-inputNumber
+    formControlName="estimatedBudget"
+    [min]="1"
+    [ngClass]="{'ng-invalid ng-dirty': isInvalid('estimatedBudget')}">
+  </p-inputNumber>
+
+  <small class="p-error" *ngIf="isInvalid('estimatedBudget')">
+    Budget must be greater than 0
+  </small>
+</div>
+<br>
+
+    <div class="p-field">
+      <label>Status</label>
+      <p-dropdown [options]="tripStatuses" formControlName="tripStatus"></p-dropdown>
+    </div>
+<br>
+    <div class="p-dialog-footer">
+      <p-button label="Cancel" class="p-button-text" (onClick)="cancel()"></p-button>
+<p-button
+  label="Save"
+  class="p-button-success"
+  [disabled]="tripForm.invalid"
+  (onClick)="saveTrip()">
+</p-button>
+    </div>
+
+  </form>
+</p-dialog>
+
+
+
+<p-table 
+  #dt
+  [value]="trips" 
+  responsiveLayout="scroll"
+  [paginator]="true"     
+  [rows]="4"             
+  [rowsPerPageOptions]="[4, 8, 12]"  
+  [showCurrentPageReport]="true"
+  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} trips"
+    [globalFilterFields]="['tripName','tripId','tripType','sourceCity','destinationCity','transportMode','tripStatus']">
+
+<ng-template pTemplate="header">
+  <tr>
+    <th pSortableColumn="tripName">Trip Name <p-sortIcon field="tripName"></p-sortIcon></th>
+    <th pSortableColumn="tripId">Trip ID <p-sortIcon field="tripId"></p-sortIcon></th>
+    <th pSortableColumn="tripType">Type <p-sortIcon field="tripType"></p-sortIcon></th>
+    <th pSortableColumn="sourceCity">Source <p-sortIcon field="sourceCity"></p-sortIcon></th>
+    <th pSortableColumn="destinationCity">Destination <p-sortIcon field="destinationCity"></p-sortIcon></th>
+    <th>Departure</th> 
+    <th>Return</th>    
+    <th pSortableColumn="transportMode">Transport <p-sortIcon field="transportMode"></p-sortIcon></th>
+    <th pSortableColumn="estimatedBudget">Budget <p-sortIcon field="estimatedBudget"></p-sortIcon></th>
+    <th pSortableColumn="tripStatus">Status <p-sortIcon field="tripStatus"></p-sortIcon></th>
+    <th>Actions</th>
+  </tr>
+</ng-template>
+
+
+<ng-template pTemplate="body" let-trip let-i="rowIndex">
+    <tr>
+      <td>{{ trip.tripName }}</td>
+      <td>{{ trip.tripId }}</td>
+      <td>{{ trip.tripType }}</td>
+      <td>{{ trip.sourceCity }}</td>
+      <td>{{ trip.destinationCity }}</td>
+      <td>{{ trip.departureDate }}</td>
+      <td>{{ trip.returnDate }}</td>
+      <td>{{ trip.transportMode }}</td>
+      <td>{{ trip.estimatedBudget }}</td>
+      <td>{{ trip.tripStatus }}</td>
+      <td>
+        <p-button
+          icon="pi pi-pencil"
+          class="p-button-rounded p-button-warning mr-2"
+          (onClick)="openEditDialog(trip, i)">
+        </p-button>
+
+        <p-button
+          icon="pi pi-trash"
+          class="p-button-rounded p-button-danger"
+          (onClick)="deleteTrip(trip)">
+        </p-button>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>

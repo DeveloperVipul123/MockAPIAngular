@@ -1,0 +1,63 @@
+/* Page background with travel vibe */
+.login-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(to right, #56ccf2, #2f80ed);
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Center card wrapper */
+.login-wrapper {
+  width: 350px;
+}
+
+/* Card styling */
+.login-card {
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
+  background-color: #ffffffcc; /* semi-transparent for gradient background */
+  text-align: center;
+}
+
+/* Subtitle text */
+.subtitle {
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 1.5rem;
+}
+
+/* Form field spacing */
+.login-form .field {
+  margin-bottom: 1rem;
+  text-align: left;
+}
+
+/* Label styling */
+.login-form label {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-weight: 600;
+}
+
+/* Error text */
+.error {
+  color: #f44336;
+  font-size: 0.8rem;
+}
+
+/* Login button styling */
+.login-btn {
+  width: 100%;
+  margin-top: 1rem;
+  background: #2f80ed;
+  border: none;
+  font-weight: 600;
+}
+
+/* Button hover effect */
+.login-btn:hover {
+  background: #1366d6;
+}

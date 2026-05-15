@@ -1,0 +1,11 @@
+{
+  "routes": {
+    "/MockAPIAngular": {},
+    "/MockAPIAngular/login": {},
+    "/MockAPIAngular/main": {},
+    "/MockAPIAngular/main/budget": {},
+    "/MockAPIAngular/main/completed": {},
+    "/MockAPIAngular/main/total": {},
+    "/MockAPIAngular/main/upcoming": {}
+  }
+}
